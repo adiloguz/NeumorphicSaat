@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Saat Tasarımı</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #1e1e1e;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s ease;
+        }
+
+        .container {
+            width: 320px;
+            height: 620px;
+            background-color: #2e2e2e;
+            border-radius: 30px;
+            box-shadow: 15px 15px 30px #1b1b1b, -15px -15px 30px #353535;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .top-icons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 10px 0;
+            color: white;
+            font-size: 24px;
+        }
+
+        .icon {
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .icon:hover {
+            transform: scale(1.2);
+            color: #f82c76;
+        }
+
+        .clock {
+            margin: 40px 0;
+            transition: transform 0.5s ease;
+        }
+
+        .clock:active {
+            animation: shake 0.5s cubic-bezier(.36, .07, .19, .97) both;
+        }
+
+        @keyframes shake {
+            10%,
+            90% {
+                transform: translate3d(-1px, 0, 0);
+            }
+
+            20%,
+            80% {
+                transform: translate3d(2px, 0, 0);
+            }
+
+            30%,
+            50%,
+            70% {
+                transform: translate3d(-4px, 0, 0);
+            }
+
+            40%,
+            60% {
+                transform: translate3d(4px, 0, 0);
+            }
+        }
+
+        .clock-face {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background-color: #2e2e2e;
+            border: 2px solid #4e4e4e;
+            position: relative;
+            margin: 0 auto 20px auto;
+            box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.5), -15px -15px 20px #424242;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .hour,
+        .minute,
+        .second {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform-origin: bottom center;
+            transform: translate(-50%, -100%);
+            border-radius: 6px;
+            transition: transform 0.5s cubic-bezier(0.4, 2.3, 0.3, 1);
+        }
+
+        .hour {
+            width: 8px;
+            height: 60px;
+            background-color: white;
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .minute {
+            width: 4px;
+            height: 80px;
+            background-color: #f82c76;
+            box-shadow: 0px 0px 10px rgba(248, 44, 118, 0.5);
+        }
+
+        .second {
+            width: 2px;
+            height: 90px;
+            background-color: #f82c76;
+            box-shadow: 0px 0px 10px rgba(248, 44, 118, 0.5);
+        }
+
+        .location,
+        .time,
+        .country {
+            color: #ccc;
+            transition: color 0.3s ease;
+        }
+
+        .location {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .time {
+            font-size: 36px;
+            margin-bottom: 5px;
+        }
+
+        .country {
+            font-size: 16px;
+        }
+
+        .bottom-menu {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .bottom-menu div {
+            text-align: center;
+            color: #777;
+            font-size: 16px;
+            cursor: pointer;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .bottom-menu div:hover {
+            color: #f82c76;
+            transform: scale(1.1);
+        }
+
+        .bottom-menu .active {
+            color: #f82c76;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background-color: #f82c76;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 20px;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(248, 44, 118, 0.5);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background-color: #d81b60;
+            box-shadow: 0 0 20px rgba(248, 44, 118, 0.8);
+        }
+
+        .dark-mode {
+            background-color: #1e1e1e;
+        }
+
+        .dark-mode .container {
+            background-color: #2e2e2e;
+            box-shadow: 15px 15px 30px #1b1b1b, -15px -15px 30px #353535;
+        }
+
+        .dark-mode .clock-face {
+            background-color: #2e2e2e;
+            box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.5), -15px -15px 20px #424242;
+        }
+
+        .light-mode {
+            background-color: #f5f5f5;
+        }
+
+        .light-mode .container {
+            background-color: #ffffff;
+            box-shadow: 15px 15px 30px #c1c1c1, -15px -15px 30px #ffffff;
+            color: #333;
+        }
+
+        .light-mode .clock-face {
+            background-color: #ffffff;
+            box-shadow: 15px 15px 20px rgba(200, 200, 200, 0.5), -15px -15px 20px #f1f1f1;
+        }
+
+        .light-mode .time,
+        .light-mode .location,
+        .light-mode .country {
+            color: #333;
+        }
+
+        .light-mode .icon {
+            filter: invert(1);
+        }
+
+        .light-mode .theme-toggle {
+            background-color: #333;
+            color: white;
+        }
+
+        .light-mode .theme-toggle:hover {
+            background-color: #555;
+            box-shadow: 0 0 20px rgba(51, 51, 51, 0.8);
+        }
+    </style>
+</head>
+
+<body class="dark-mode">
+    <div class="container">
+        <div class="top-icons">
+            <img src="https://img.icons8.com/material-outlined/24/ffffff/edit--v1.png" class="icon" alt="Edit" id="edit-icon">
+            <img src="https://img.icons8.com/material-outlined/24/ffffff/plus-math--v1.png" class="icon" alt="Add" id="add-icon">
+        </div>
+        <div class="clock">
+            <div class="clock-face">
+                <div class="hour" id="hour"></div>
+                <div class="minute" id="minute"></div>
+                <div class="second" id="second"></div>
+            </div>
+            <div class="location">İstanbul</div>
+            <div class="time" id="time">10:35 AM</div>
+            <div class="country">Türkiye</div>
+        </div>
+        <div class="bottom-menu">
+            <div class="active">🕒<br>Saat</div>
+            <div>📋<br>Liste</div>
+            <div>⚙️<br>Ayarlar</div>
+        </div>
+        <button class="theme-toggle" onclick="toggleTheme()">Tema Değiştir</button>
+    </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const hour = now.getHours();
+            const minute = now.getMinutes();
+            const second = now.getSeconds();
+
+            const hourDegrees = (hour % 12) * 30 + minute * 0.5; // 30 derece/saat, 0.5 derece/dakika
+            const minuteDegrees = minute * 6; // 6 derece/dakika
+            const secondDegrees = second * 6; // 6 derece/saniye
+
+            document.getElementById('hour').style.transform = `translate(-50%, -100%) rotate(${hourDegrees}deg)`;
+            document.getElementById('minute').style.transform = `translate(-50%, -100%) rotate(${minuteDegrees}deg)`;
+            document.getElementById('second').style.transform = `translate(-50%, -100%) rotate(${secondDegrees}deg)`;
+
+            // Dijital saat gösterimini güncelle
+            document.getElementById('time').textContent = now.toLocaleTimeString('tr-TR', {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            });
+        }
+
+        function toggleTheme() {
+            const body = document.body;
+            body.classList.toggle('light-mode');
+            body.classList.toggle('dark-mode');
+        }
+
+        // Düzenleme simgesine tıklama işlemi
+        document.getElementById('edit-icon').addEventListener('click', function() {
+            alert('Düzenleme moduna geçildi!');
+            // Burada düzenleme moduna geçiş işlemlerini yapabilirsiniz
+        });
+
+        // Ekleme simgesine tıklama işlemi
+        document.getElementById('add-icon').addEventListener('click', function() {
+            alert('Yeni öğe eklendi!');
+            // Burada yeni öğe ekleme işlemlerini yapabilirsiniz
+        });
+
+        setInterval(updateClock, 1000); // Her saniye saati güncelle
+        updateClock(); // Doğru saati anında göstermek için başlangıçta saati güncelle
+    </script>
+</body>
+
+</html>
